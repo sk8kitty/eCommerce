@@ -21,12 +21,12 @@ namespace eCommerce.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Item i) 
+        public async Task<IActionResult> Create(Item i) 
         {
             if (ModelState.IsValid) 
             {
                 _context.Items.Add(i);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 ViewData["Message"] = $"{i.Title} was added successfully!";
 
