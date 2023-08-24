@@ -44,5 +44,30 @@ namespace eCommerce.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            Item? itemToEdit = await _context.Items.FindAsync(id);
+
+            if (itemToEdit == null)
+            {
+                return NotFound();
+            }
+
+            return View(itemToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Item i)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Items.Update(i);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(i);
+        }
     }
 }
