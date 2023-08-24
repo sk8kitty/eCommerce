@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using eCommerce.Models;
 using eCommerce.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Controllers
 {
@@ -11,6 +12,14 @@ namespace eCommerce.Controllers
         public ItemController(BakeryItemContext context)
         {
            _context = context;
+        }
+
+
+
+        public async Task<IActionResult> Index()
+        {
+            List<Item> items = await (from item in _context.Items select item).ToListAsync();
+            return View(items);
         }
 
 
