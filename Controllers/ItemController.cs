@@ -37,12 +37,12 @@ namespace eCommerce.Controllers
                 _context.Items.Add(i);
                 await _context.SaveChangesAsync();
 
-                ViewData["Message"] = $"{i.Title} was added successfully!";
+                TempData["Message"] = $"{i.Title} was added successfully!";
 
-                return View();
+                return RedirectToAction("Index");
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
 
@@ -65,10 +65,45 @@ namespace eCommerce.Controllers
             {
                 _context.Items.Update(i);
                 await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"{i.Title} was edited successfully!";
+
                 return RedirectToAction("Index");
             }
 
-            return View(i);
+            return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            Item? itemToDelete = await _context.Items.FindAsync(id);
+
+            if(itemToDelete == null) 
+            {
+                return NotFound();
+            }
+
+            return View(itemToDelete);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            Item? itemToDelete = await _context.Items.FindAsync(id);
+
+            if (itemToDelete != null)
+            {
+                _context.Items.Remove(itemToDelete);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"{itemToDelete.Title} was deleted successfully!";
+
+                return RedirectToAction("Index");
+            }
+
+            TempData["Message"] = "This item was already deleted.";
+            return RedirectToAction("Index");
         }
     }
 }
