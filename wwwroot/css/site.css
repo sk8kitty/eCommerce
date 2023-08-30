@@ -16,3 +16,20 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.validation-summary-errors ul {
+    list-style: none;
+    padding: -0px;
+    margin-bottom: 0px;
+}
+
+#welcome-alert {
+    margin-top: 0.5em;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+    
+}
