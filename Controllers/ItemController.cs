@@ -16,10 +16,32 @@ namespace eCommerce.Controllers
 
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            List<Item> items = await (from item in _context.Items select item).ToListAsync();
-            return View(items);
+            // setup for pagination
+            const int NumItemsDisplayed = 3;
+            const int PageOffset = 1; // for using current page and deciding how many items to skip
+            int currPage = id ?? 1; // sets to id value if exists, otherwise sets to 1
+
+            // getting num of pages
+            int totalItems = await _context.Items.CountAsync();
+            double maxPages = Math.Ceiling((double)totalItems / NumItemsDisplayed);
+            int lastPage = Convert.ToInt32(maxPages); // rounds up to next whole page
+
+            // method syntax:
+            //List<Item> items = _context.Items
+            //                     .Skip(NumItemsDisplayed * (currPageId - PageOffset))
+            //                     .Take(NumItemsDisplayed)
+            //                     .ToList();
+
+            // query syntax:
+            List<Item> items = await (from item in _context.Items select item)
+                                .Skip(NumItemsDisplayed * (currPage - PageOffset))
+                                .Take(NumItemsDisplayed)
+                                .ToListAsync();
+
+            ItemCatalogViewModel catalogModel = new(items, lastPage, currPage);
+            return View(catalogModel);
         }
 
 
