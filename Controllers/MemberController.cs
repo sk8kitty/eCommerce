@@ -63,7 +63,7 @@ namespace eCommerce.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("", "Credentials not found.");
+                ModelState.AddModelError(string.Empty, "Credentials not found.");
             }
 
             // if member was not found or modelstate was invalid
