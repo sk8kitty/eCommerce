@@ -12,6 +12,6 @@ namespace eCommerce.Data
 
         public DbSet<Item> Items { get; set; }
 
-
+        public DbSet<Member> Members { get; set; }
     }
 }
