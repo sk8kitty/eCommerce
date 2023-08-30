@@ -28,14 +28,16 @@ namespace eCommerce.Models
         [Required]
         [Compare(nameof(Email))]
         [Display(Name = "Confirm Email")]
-        public string EmailConfirm { get; set; }
+        public string ConfirmEmail { get; set; }
 
         [Required]
         [StringLength(75, MinimumLength = 6)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [Display(Name = "Confirm Password")]
-        public string PasswordConfirm { get; set; }
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
     }
 }
