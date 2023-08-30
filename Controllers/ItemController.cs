@@ -41,7 +41,7 @@ namespace eCommerce.Controllers
                                 .ToListAsync();
 
             ItemCatalogViewModel catalogModel = new(items, lastPage, currPage);
-            return View(items);
+            return View(catalogModel);
         }
 
 
