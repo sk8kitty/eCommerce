@@ -28,7 +28,10 @@ Extra bootstrap components have been added to the HTML, making the webiste look 
 
 ### 08/02:
 The DB Context & database itself have been implemented. Full CRUD functionality is soon to come!  
+
+### 08/31
+All done!!! Catalog and registration fully functional :3
 <br>
 
 ## Homepage Preview
-![image](https://github.com/sk8kitty/eCommerce/assets/130592845/182c5ecc-ba58-461f-b813-5d125134a352)
+![image](https://github.com/sk8kitty/eCommerce/assets/130592845/b94a570e-e831-4a32-9648-f3c54aaed5af)
